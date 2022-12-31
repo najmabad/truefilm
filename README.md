@@ -5,7 +5,7 @@ This project aims to provide insights about movies using two datasets:
 
 - movies_metadata: a dataset containing various information about movies, sourced from iMDB.com
 - enwiki-latest-abstract: a dataset containing the title, abstract, URL, and links for each Wikipedia article
-- 
+
 The project's ETL (extract, transform, load) process processes these datasets and outputs a table called "movies", which allows users to perform queries to understand the top performing genres and production companies.
 Additionally, users can easily navigate to the corresponding Wikipedia page for each film to read more in-depth about interesting films.
 
@@ -16,8 +16,21 @@ You can run a notebook at `localhost:8888` with token = `mypassword`
 
 ## Project Requirements
 - Docker
+- enwiki-latest-abstract.xml data file
+- movies_metadata.csv data file
 - Python 3.9
 
+### Docker
+Docker installation depends on your operating system. You can find more details [here](https://docs.docker.com/get-docker/)
+
+### Datafiles
+Download the following two datasets:
+- https://dumps.wikimedia.org/enwiki/latest/enwiki-latest-abstract.xml.gz 
+- https://www.kaggle.com/rounakbanik/the-movies-dataset/version/7#movies_metadata.csv
+
+And place them in the `input` folder. Make sure to also unzip the `enwiki-latest-abstract.xml.gz` file.
+
+### Python
 This project requires Python 3.9 and Docker to be available.
 Make sure you have Python 3.9 installed on your machine. You can check the version of Python you have installed by running python --version in the terminal.
 
