@@ -1,11 +1,12 @@
 import sys
 
+from config import REVENUE_TO_BUDGET
 from truefilm_etl.etl.match_data import IMDBProcessor, WikipediaProcessor, MatchData
 from truefilm_etl.utils.postgres import PostgresDAO
 
 import logging.config
 
-logging.config.fileConfig(fname='logging.config', disable_existing_loggers=False)
+logging.config.fileConfig(fname="logging.config", disable_existing_loggers=False)
 
 # Get the logger specified in the file
 logger = logging.getLogger(__name__)
@@ -31,7 +32,9 @@ def main(imdb_file_path: str, wikipedia_file_path: str):
         # Write the dataframe to a PostgreSQL database
         logger.info("🌟 STEP 3: Writing matched dataframes to PostgreSQL")
         postgres_dao = PostgresDAO()
-        postgres_dao.write_to_table(matched_imbd_and_wiki, "movies")
+        postgres_dao.write_to_table(
+            matched_imbd_and_wiki, "movies", order_by_col=REVENUE_TO_BUDGET, rows=1000
+        )
         logger.info("✅  STEP 3: Completed \n")
 
         logger.info("🎉 Finished ETL process")

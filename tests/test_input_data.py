@@ -131,7 +131,9 @@ def test_add_cleaned_title_type_and_year_columns(spark, wiki_df):
     )
 
     # Call the method with the input DataFrame and the url_column
-    df = WikipediaData.add_cleaned_title_type_and_year_columns(wiki_df, URL).orderBy("title")
+    df = WikipediaData.add_cleaned_title_type_and_year_columns(wiki_df, URL).orderBy(
+        "title"
+    )
     df.show()
     df.printSchema()
     expected_df.orderBy("title").show()

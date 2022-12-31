@@ -1,8 +1,6 @@
 import os
 
-ROOT_DIR = os.path.abspath(
-    os.path.join(os.path.dirname(os.path.abspath(__file__)), "")
-)
+ROOT_DIR = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), ""))
 
 
 POSTGRES_JAR_FILEPATH = os.path.join(ROOT_DIR, "jars", "postgresql-42.5.1.jar")
