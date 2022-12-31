@@ -138,4 +138,4 @@ Once the containers are initialized a first time, you can stop them and run the 
 - Deploy the application with Kubernetes
 - Explore different matching techniques
 - Add more tests
-
+- Add `great_expectations` library to test for data correctness
