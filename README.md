@@ -107,9 +107,9 @@ In order to match the IMDB dataset with the Wikipedia pages, we have identified 
 1. No match. In this case, the row is kept as is.
 2. One match. In this case, the row is matched to a single Wikipedia row.
 3. More than one match where one is a film and the others are not. In this case, the row is matched to the Wikipedia row that is a film.
-4. More than one match where there are multiple films. In this case, the row is matched to the Wikipedia row that is a film and has the same year as the IMDB row.
+4. More than one match where there are multiple films. In this case, the row is matched to the Wikipedia row that is a film and has the same year as the IMDB row. 
 
-5. To implement this logic, the function filters the Wikipedia data to keep only rows that match the conditions for each of the four scenarios. For example, to implement scenario 1, the function filters the Wikipedia data to keep only rows where the "wiki_year" column is empty and the "type" column is an empty string. To implement scenario 4, the function filters the Wikipedia data to keep only rows where the "wiki_year" column is not empty and the "type" column is equal to "film".
+To implement this logic, the function filters the Wikipedia data to keep only rows that match the conditions for each of the four scenarios. For example, to implement scenario 1, the function filters the Wikipedia data to keep only rows where the "wiki_year" column is empty and the "type" column is an empty string. To implement scenario 4, the function filters the Wikipedia data to keep only rows where the "wiki_year" column is not empty and the "type" column is equal to "film".
 
 Next, the function performs a join between the filtered Wikipedia data and the IMDB data, using the appropriate join type (inner or left) and matching on the appropriate columns (either "cleaned_title" and "year" or "cleaned_title" only). The resulting dataframes are then combined using the union function and a subset of columns is selected to keep using the select function.
 
@@ -125,6 +125,9 @@ To run the test `pytest` needs to be downloaded. You can do this by running the 
 ```
 pip install -r requirements-dev.txt
 ```
+then you can run:
+
+```pytest .```
 
 ## Troubleshooting
 If you get an error linked to the postgres container when running the `./truefilm_cli.sh run-sample-etl` or `./truefilm_cli.sh run` command, try first running `docker-compose up` in the terminal.
