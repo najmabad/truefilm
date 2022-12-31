@@ -13,3 +13,6 @@ __pycache__/
 
 # Ignore virtualenv
 myenv/
+
+# Ignore .DS_Store
+.DS_Store
