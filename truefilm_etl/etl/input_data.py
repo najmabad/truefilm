@@ -33,6 +33,15 @@ logger = logging.getLogger(__name__)
 
 
 class WikipediaData(SparkFileDAO, SparkDataFrame):
+    """A class for handling and processing Wikipedia data stored in an XML file.
+
+    The class inherits from `SparkFileDAO` and `SparkDataFrame` to provide methods for reading and writing data to and
+    from files, and for manipulating and transforming data stored in Apache Spark DataFrames.
+
+    Args:
+        wikipedia_file_path (str): The file path of the Wikipedia abstracts XML file.
+    """
+
     def __init__(self, wikipedia_file_path: str):
         super().__init__()
         self.wiki_abstracts_filepath = wikipedia_file_path
@@ -146,6 +155,15 @@ class WikipediaData(SparkFileDAO, SparkDataFrame):
 
 
 class IMDBData(SparkFileDAO, SparkDataFrame):
+    """A class for handling and processing IMDB data stored in a CSV file.
+
+    The class inherits from `SparkFileDAO` and `SparkDataFrame` to provide methods for reading and writing data to and
+    from files, and for manipulating and transforming data stored in Apache Spark DataFrames.
+
+    Args:
+        imdb_file_path (str): The file path of the IMDB CSV file.
+    """
+
     def __init__(self, imdb_file_path: str):
         super().__init__()
         self.imdb_movies_metadata = imdb_file_path

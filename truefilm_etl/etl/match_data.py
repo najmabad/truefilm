@@ -30,6 +30,13 @@ logger = logging.getLogger(__name__)
 
 
 class WikipediaProcessor:
+    """Processes raw Wikipedia data and prepares it for joining with IMDB data.
+
+    This class processes the raw data from the Wikipedia abstracts file to prepare it for joining with IMDB data. It
+    extracts the cleaned_title, year, and object_type from the url_column using a regex pattern and adds these
+    extracted values as new columns to the dataframe. It also removes the 'title' and 'links' columns from the dataframe.
+    """
+
     def __init__(self, wikipedia_file_path: str):
         self.wikipedia_data = WikipediaData(wikipedia_file_path)
 
@@ -47,6 +54,21 @@ class WikipediaProcessor:
 
 class IMDBProcessor:
     def __init__(self, imdb_file_path: str):
+        """
+        The IMDBProcessor class processes the raw IMDB data and returns a dataframe that is ready
+        to be joined with the Wikipedia data in the ETL pipeline. The class takes an IMDB file path as input and
+        initializes an IMDBData object with that file path. It then defines the key columns to keep,
+        the column names to rename, and the filter conditions to apply to the data.
+
+        The df() method applies these processing steps to the raw data, including sub-setting the data to only
+        include the specified key columns, renaming the columns, casting the columns to the correct data types,
+        applying filters to the data, transforming JSON columns to a list of names, extracting the year from
+        the release date, adding a column for the ratio of revenue to budget, adding a column for the cleaned title,
+        and repartitioning the data by the cleaned title column.
+
+        The method returns a dataframe with the columns title, year, production_companies, genres, rating,
+        revenue, budget, revenue_to_budget, and cleaned_title.
+        """
         self.imdb_data = IMDBData(imdb_file_path=imdb_file_path)
         self.key_columns = [
             TITLE,
@@ -97,6 +119,30 @@ class IMDBProcessor:
 
 
 class MatchData:
+    """
+    MatchData is a class that performs matching between two DataFrames: one containing data from IMDB, and the other
+    containing data from Wikipedia.
+
+    The matching is done in several steps:
+
+    Match the IMDB data on title, year, and type with the Wikipedia data where the year and type are both not empty.
+    Exclude the IMDB data that was matched in step 1 from the pool of 'matchable' data.
+    Match the remaining 'matchable' IMDB data on title and type with the Wikipedia data where the year is empty
+    and the type is not empty.
+    Exclude the IMDB data that was matched in step 3 from the pool of 'matchable' data.
+    Match the remaining 'matchable' IMDB data on title with the Wikipedia data where the year and type are both empty.
+    Select only the specified columns from the three matched DataFrames.
+    Union the three matched DataFrames.
+    Attributes:
+
+    imdb_df (pyspark.sql.dataframe.DataFrame): DataFrame containing data from IMDB.
+    wiki_df (pyspark.sql.dataframe.DataFrame): DataFrame containing data from Wikipedia.
+    Methods:
+
+    match (): Performs the matching between the IMDB and Wikipedia data and returns a new DataFrame containing the
+    matched data.
+    """
+
     def __init__(self, imdb_df: DataFrame, wiki_df: DataFrame):
         self.imdb_df = imdb_df
         self.wiki_df = wiki_df

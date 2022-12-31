@@ -1,5 +1,6 @@
 import os
 
+from config import REVENUE_TO_BUDGET
 from truefilm_etl.utils.spark import MySparkSession
 
 import logging.config
@@ -31,7 +32,14 @@ class PostgresDAO(MySparkSession):
             "driver": "org.postgresql.Driver",
         }
 
-    def write_to_table(self, df, table_name, mode="overwrite"):
+    def write_to_table(
+        self,
+        df,
+        table_name,
+        mode="overwrite",
+        order_by_col: str = None,
+        rows: int = None,
+    ):
         """Writes a DataFrame to a PostgreSQL table.
 
         Args:
@@ -42,6 +50,14 @@ class PostgresDAO(MySparkSession):
                 table. Defaults to 'overwrite'.
         """
         logger.info(f"Writing to table '{table_name}'")
+
+        if order_by_col:
+            logger.info("Sorting the data by column: " + order_by_col)
+            df = df.orderBy(REVENUE_TO_BUDGET, ascending=False)
+
+        if rows:
+            logger.info("Limiting to " + str(rows) + " rows")
+            df = df.limit(rows)
 
         df.write.jdbc(
             url=self.url, table=table_name, mode=mode, properties=self.properties
