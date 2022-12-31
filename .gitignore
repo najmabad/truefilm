@@ -8,4 +8,8 @@ __pycache__/
 # Ignore Jupyter notebook checkpoints
 .ipynb_checkpoints/
 
+# Ignore .idea directory
 .idea/
+
+# Ignore virtualenv
+myenv/
