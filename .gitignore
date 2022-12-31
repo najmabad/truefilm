@@ -1,0 +1,11 @@
+# Ignore PostgreSQL data directory
+postgres-data/
+
+# Ignore pytest cache directory
+__pycache__/
+.pytest_cache/
+
+# Ignore Jupyter notebook checkpoints
+.ipynb_checkpoints/
+
+.idea/
