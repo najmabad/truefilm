@@ -1,6 +1,5 @@
-import pytest
-
 import pyspark.sql.types as t
+import pytest
 
 from truefilm_etl.utils.spark import MySparkSession
 

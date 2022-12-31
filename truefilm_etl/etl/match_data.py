@@ -1,27 +1,14 @@
+import logging.config
+
 import pyspark.sql.functions as f
 import pyspark.sql.types as t
 from pyspark.sql import DataFrame
 
-from config import (
-    ABSTRACT,
-    BUDGET,
-    CLEANED_TITLE,
-    GENRES,
-    PRODUCTION_COMPANIES,
-    RATING,
-    RELEASE_DATE,
-    REVENUE,
-    REVENUE_TO_BUDGET,
-    TITLE,
-    TYPE,
-    URL,
-    VOTE_AVERAGE,
-    WIKI_YEAR,
-    YEAR,
-)
+from config import (ABSTRACT, BUDGET, CLEANED_TITLE, GENRES,
+                    PRODUCTION_COMPANIES, RATING, RELEASE_DATE, REVENUE,
+                    REVENUE_TO_BUDGET, TITLE, TYPE, URL, VOTE_AVERAGE,
+                    WIKI_YEAR, YEAR)
 from truefilm_etl.etl.input_data import IMDBData, WikipediaData
-
-import logging.config
 
 logging.config.fileConfig(fname="logging.config", disable_existing_loggers=False)
 

@@ -1,9 +1,9 @@
+import logging.config
+
 from pyspark.sql import DataFrame, SparkSession
 from pyspark.sql import types as t
 
 from config import JARS_FILE_PATHS
-
-import logging.config
 
 logging.config.fileConfig(fname="logging.config", disable_existing_loggers=False)
 

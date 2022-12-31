@@ -1,9 +1,8 @@
+import logging.config
 import os
 
 from config import REVENUE_TO_BUDGET
 from truefilm_etl.utils.spark import MySparkSession
-
-import logging.config
 
 logging.config.fileConfig(fname="logging.config", disable_existing_loggers=False)
 

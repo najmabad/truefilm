@@ -1,6 +1,6 @@
 import pytest
 
-from config import CLEANED_TITLE, WIKI_YEAR, TYPE, TITLE, URL
+from config import CLEANED_TITLE, TITLE, TYPE, URL, WIKI_YEAR
 from truefilm_etl.etl.input_data import WikipediaData
 
 

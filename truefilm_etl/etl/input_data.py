@@ -1,30 +1,15 @@
+import logging.config
 import os
-
-from pyspark.sql import DataFrame
-
 import subprocess
 
 import pyspark.sql.functions as f
+from pyspark.sql import DataFrame
 from pyspark.sql import types as t
 
-from config import (
-    BUDGET,
-    CLEANED_TITLE,
-    GENRES,
-    PRODUCTION_COMPANIES,
-    RELEASE_DATE,
-    REVENUE,
-    REVENUE_TO_BUDGET,
-    TITLE,
-    TYPE,
-    URL,
-    WIKI_YEAR,
-    YEAR,
-)
-
-from truefilm_etl.utils.spark import SparkFileDAO, SparkDataFrame
-
-import logging.config
+from config import (BUDGET, CLEANED_TITLE, GENRES, PRODUCTION_COMPANIES,
+                    RELEASE_DATE, REVENUE, REVENUE_TO_BUDGET, TITLE, TYPE, URL,
+                    WIKI_YEAR, YEAR)
+from truefilm_etl.utils.spark import SparkDataFrame, SparkFileDAO
 
 logging.config.fileConfig(fname="logging.config", disable_existing_loggers=False)
 

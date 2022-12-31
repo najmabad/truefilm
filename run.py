@@ -1,10 +1,10 @@
+import logging.config
 import sys
 
 from config import REVENUE_TO_BUDGET
-from truefilm_etl.etl.match_data import IMDBProcessor, WikipediaProcessor, MatchData
+from truefilm_etl.etl.match_data import (IMDBProcessor, MatchData,
+                                         WikipediaProcessor)
 from truefilm_etl.utils.postgres import PostgresDAO
-
-import logging.config
 
 logging.config.fileConfig(fname="logging.config", disable_existing_loggers=False)
 
